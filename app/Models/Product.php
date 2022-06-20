@@ -20,4 +20,13 @@ class Product extends Model
         'image',
         'status'
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 }
