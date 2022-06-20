@@ -11,10 +11,13 @@ class ProductFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->colorName,
+            'description' => $this->faker->realText(50),
+            'image' => "",
+            'status' => true
         ];
     }
 }
