@@ -431,7 +431,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <div class="p-6">
                     <div class="flex items-center">
-                        <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Count of all active and verified users</div>
+                        <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Count of all
+                            active and verified users
+                        </div>
                     </div>
 
                     <div class="ml-12">
@@ -506,7 +508,7 @@
 
                     <div class="ml-12">
                         <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                            {{$summarized_active_attached_products_price}}
+                            ${{$summarized_active_attached_products_price}}
                         </div>
                     </div>
                 </div>
@@ -521,8 +523,27 @@
                     <div class="ml-12">
                         <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                             @foreach ($summarized_active_attached_products_price_per_user as $user)
-                                    <p>{{ $user->name }} : {{ $user->price }}</p>
+                                <p>{{ $user->name }} : ${{ $user->price }}</p>
                             @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
+                    <div class="flex items-center">
+                        <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">
+                            The exchange rates for USD and RON based on Euro
+                        </div>
+                    </div>
+
+                    <div class="ml-12">
+                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            @if($currency_rates['success'])
+                                Date: {{ $currency_rates['date'] }}
+                                @foreach ($currency_rates['rates'] as $currency => $rate)
+                                    <p>1 {{ $currency_rates['base']}} = {{ $rate }} {{$currency }}</p>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

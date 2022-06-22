@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -51,6 +51,13 @@ class HomeController extends Controller
             ->where('products.status', '=', 1)
             ->groupBy('users.name')
             ->get()->all();
+
+        $api_rates = HTTP::get('http://api.exchangeratesapi.io/latest', [
+            'access_key' => 'cee212a839adf0ce9f3cafc93f3f8890',
+            'base' => 'EUR',
+            'symbols' => 'USD,RON'
+        ]);
+        $data['currency_rates'] = $api_rates->json();
 
         return view('report', $data);
     }
